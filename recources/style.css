@@ -1,0 +1,68 @@
+
+/* Insert Background*/
+.root {
+    -fx-background-image: url("background.jpg");
+}
+
+/* Fontsize, Fill, Wight and Effect on Labels*/
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+
+
+}
+#welcome-text {
+    -fx-font-size: 32px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+#actiontarget {
+    -fx-fill: FIREBRICK;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+.button {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+.tab-pane{
+    -fx-border-color: black;
+    -fx-border-width: 5px;
+    -fx-border-style: solid;
+}
+
+.form {
+    -fx-background-color: linear-gradient(#bfd3e8 0%, #a8c2de 25%, #90b0d5 100%);
+    -fx-padding: 40 20 30 20;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
+
+}
+
+.header {
+    -fx-font-size: 30;
+    -fx-background-color: linear-gradient(#c3e8cd 0%, #b4e4be 25%, #86d88b 100%);
+    -fx-padding: 40 20 30 20;
+    -fx-spacing: 20;
+    -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
+}
+
+.selectorbar {
+    -fx-padding: 20;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-background-color: linear-gradient(#e8bfc6 0%, #e8adb0 25%, #e894a1 100%);
+    -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
+}
