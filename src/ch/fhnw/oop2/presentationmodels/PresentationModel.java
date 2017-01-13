@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,7 +33,7 @@ public class PresentationModel {
     private StringProperty title = new SimpleStringProperty("Buildings");
     private static final String FILE_NAME = "/buildings.csv";
     private static final String SPLITTER = ";"; // bei .txt wäre hier Spliter nun TAB = "//t"
-    private final ObservableList<Building> building = FXCollections.observableArrayList();
+    private final ObservableList<Building> buildings = FXCollections.observableArrayList();
     private ObjectProperty<Building> selectedBuilding = new SimpleObjectProperty<>(); // muss ObjectProperty sein!
     private final  Building buildingProxy = new Building();
 
@@ -77,8 +78,8 @@ public class PresentationModel {
 
     // Constructor
     public PresentationModel() {
-        building.addAll(readFromFile());
-        Platform.runLater(() -> setSelectedBuilding(building.get(0)));
+        buildings.addAll(readFromFile());
+        Platform.runLater(() -> setSelectedBuilding(buildings.get(0)));
         // damit zuerst UI-Teil hochfährt und genug Zeit hat, um die Daten aus der TableView korrekt darzustellen.
 
         // im Constructor: undo/redo-Binding-Logik
@@ -115,7 +116,7 @@ public class PresentationModel {
         buildingProxy.materialProperty().bindBidirectional(building.materialProperty());
         buildingProxy.longitudeProperty().bindBidirectional(building.longitudeProperty());
         buildingProxy.latitudeProperty().bindBidirectional(building.latitudeProperty());
-        buildingProxy.imageProperty().bindBidirectional(building.imageProperty());
+        //buildingProxy.imageProperty().bindBidirectional(buildings.imageProperty());
     }
 
     private void unbindFromProxy(Building building){
@@ -134,7 +135,7 @@ public class PresentationModel {
         buildingProxy.materialProperty().unbindBidirectional(building.materialProperty());
         buildingProxy.longitudeProperty().unbindBidirectional(building.longitudeProperty());
         buildingProxy.latitudeProperty().unbindBidirectional(building.latitudeProperty());
-        buildingProxy.imageProperty().unbindBidirectional(building.imageProperty());
+       // buildingProxy.imageProperty().unbindBidirectional(buildings.imageProperty());
 
 
 
@@ -142,11 +143,22 @@ public class PresentationModel {
     }
 
     public Building getBuilding(int id){
-        Optional<Building> pmOptional = building.stream()
+        Optional<Building> pmOptional = buildings.stream()
                 .filter(building ->  building.getId() == id)
                 .findAny();
         return pmOptional.isPresent() ? pmOptional.get() : null;
     }
+
+    private void setRanking() {
+        Collections.sort(buildings,
+                (o1, o2) -> (int) (Double.valueOf(o2.getHeight_ft()) - Double.valueOf(o1.getHeight_m())));
+
+        for (int i = 0; i < buildings.size(); i++) {
+            buildings.get(i).setRank(i+1);
+        }
+
+    }
+
 
     // die 3 Basisfunktionalitäten "speichern", "neue Zeile hinzufügen" und "Zeile löschen"
     // save-Methode (1:1 von "nationalratswahlen")
@@ -154,7 +166,8 @@ public class PresentationModel {
         try (BufferedWriter writer = Files.newBufferedWriter(getPath(FILE_NAME, true))) {
             writer.write("#id;Rank;Building;city;country;height m");
             writer.newLine();
-            building.stream().forEach(building -> {
+            setRanking();
+            buildings.stream().forEach(building -> {
                 try {
                     writer.write(building.infoAsLine());
                     writer.newLine();
@@ -170,16 +183,17 @@ public class PresentationModel {
     // new-Methode
     public void addNewBuilding() {
         //int scroll = 0;
-        String[] newLine = {"0", " ", " ", " ", " ", " ","","","","","","","","","","",""};
+        String[] newLine = {"0","0", " ", " ", " ", "0.0","0.0","","","","","","","",""};
        Building newBuilding = new Building(newLine);
-        building.add(0, newBuilding);
+        buildings.add(0, newBuilding);
         setSelectedBuilding(newBuilding);
     }
 
     // delete-Methode
     public void removeBuilding() {
-        building.remove(getSelectedBuilding());
-        setSelectedBuilding(building.get(0));
+        buildings.remove(getSelectedBuilding());
+        setSelectedBuilding(buildings.get(0));
+        setRanking();
     }
 
     // Zusatzfeature: undo/redo
@@ -260,8 +274,8 @@ public class PresentationModel {
     public static String getSplitter() {
         return SPLITTER;
     }
-    public ObservableList<Building> getBuilding() {
-        return building;
+    public ObservableList<Building> getBuildings() {
+        return buildings;
     }
     public void setSelectedBuilding(Building selectedBuilding) {
         this.selectedBuilding.set(selectedBuilding);

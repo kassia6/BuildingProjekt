@@ -23,7 +23,7 @@ public class LeftSide extends TableView<Building> implements ViewMixin {
 
     // Contructor (pro abgekapselter Klasse immer gleicher Aufbau!):
     public LeftSide(PresentationModel pm) {
-        super(pm.getBuilding());
+        super(pm.getBuildings());
         this.pm = pm;
         init();
     }

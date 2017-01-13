@@ -60,6 +60,7 @@ public class RightSide extends GridPane implements ViewMixin {
     // Contructor (pro abgekapselter Klasse immer gleicher Aufbau!):
     public RightSide(PresentationModel pm) {
         this.pm = pm;
+        getStyleClass().add("form");
         init();
     }
 
@@ -118,37 +119,42 @@ public class RightSide extends GridPane implements ViewMixin {
         getRowConstraints().addAll(rc, rc);
 
         // alle Teile hinzufügen: columnIndex, rowIndex
-        add(labelRank, 0, 0);
-        add(labelName, 0, 1);
-        add(labelCity, 0, 2);
-        add(labelCountry, 0, 3);
-        add(labelHeight_m, 0, 4);
-        add(labelHeight_ft, 0, 5);
+        //add(labelRank, 0, 0);
+        add(labelName, 0, 3);
+        add(labelCity, 0, 4);
+        add(labelHeight_m, 0, 5);
         add(labelFloors, 0, 6);
-        add(labelBuild, 0, 7);
-        add(labelArchitect, 0, 8);
-        add(labelArchitectual_style, 3, 2);
-        add(labelCost, 3, 3);
-        add(labelMaterial, 3, 4);
-        add(labelLongitude, 3, 5);
-        add(labelLatitude, 3, 6);
-        add(labelImage, 3, 7);
+        add(labelArchitect, 0, 7);
+        add(labelCost, 0, 8);
+        add(labelLongitude, 0, 9);
 
-        add(tfRank, 1, 0);
-        add(tfName, 1, 1);
-        add(tfCity, 1, 2);
-        add(tfCountry, 1, 3);
-        add(tfHeight_m, 1, 4);
-        add(tfHeight_ft, 1, 5);
+
+        add(labelBuild, 4, 4);
+        add(labelHeight_ft, 4, 5);
+        add(labelCountry, 4, 6);
+        add(labelArchitectual_style, 4, 7);
+        add(labelMaterial, 4, 8);
+        add(labelLatitude, 4, 9);
+        //add(labelImage, 3, 7);
+
+        //add(tfRank, 1, 0);
+        add(tfName, 1, 3);
+        add(tfCity, 1, 4);
+        add(tfHeight_m, 1, 5);
         add(tfFloors, 1, 6);
-        add(tfBuild, 1, 7);
-        add(tfArchitect, 1, 8);
-        add(tfArchitectual_style, 4, 2);
-        add(tfCost, 4, 3);
-        add(tfMaterial, 4, 4);
-        add(tfLongitude, 4, 5);
-        add(tfLatitude, 4, 6);
-        add(tfImage, 4, 7);
+        add(tfArchitect, 1, 7);
+        add(tfCost, 1, 8);
+        add(tfLongitude, 1, 9);
+
+
+
+        add(tfBuild, 5, 4);
+        add(tfHeight_ft, 5, 5);
+        add(tfCountry, 5, 6);
+        add(tfArchitectual_style, 5, 7);
+        add(tfMaterial, 5, 8);
+        add(tfLatitude, 5, 9);
+        //add(tfImage, 4, 7);
 
 
 
@@ -166,7 +172,7 @@ public class RightSide extends GridPane implements ViewMixin {
         tfId.textProperty().bindBidirectional(buildingProxy.idProperty(),new NumberStringConverter());
         tfRank.textProperty().bindBidirectional(buildingProxy.rankProperty(),new NumberStringConverter());
         tfName.textProperty().bindBidirectional(buildingProxy.nameProperty());
-        tfCity.textProperty().bindBidirectional((buildingProxy.cityProperty()));
+        tfCity.textProperty().bindBidirectional(buildingProxy.cityProperty());
         tfCountry.textProperty().bindBidirectional(buildingProxy.countryProperty());
         tfHeight_m.textProperty().bindBidirectional(buildingProxy.height_mProperty(),new NumberStringConverter());
         tfHeight_ft.textProperty().bindBidirectional(buildingProxy.height_ftProperty(),new NumberStringConverter());
@@ -178,7 +184,7 @@ public class RightSide extends GridPane implements ViewMixin {
         tfMaterial.textProperty().bindBidirectional(buildingProxy.materialProperty());
         tfLongitude.textProperty().bindBidirectional(buildingProxy.longitudeProperty());
         tfLatitude.textProperty().bindBidirectional(buildingProxy.latitudeProperty());
-        tfImage.textProperty().bindBidirectional(buildingProxy.imageProperty());
+       // tfImage.textProperty().bindBidirectional(buildingProxy.imageProperty());
 
 
     }
@@ -215,7 +221,7 @@ public class RightSide extends GridPane implements ViewMixin {
     public Label getLabelName() {
         return labelName;
     }
-    public void setLabelBuilding(Label labelBuilding) {
+    public void setLabelName(Label labelName) {
         this.labelName = labelName;
     }
     public TextField getTfName() {

@@ -145,7 +145,7 @@ public class Building {
         return build;
     }
     public void setBuild(String build) {
-        this.city.set(build);
+        this.build.set(build);
     }
     public String getArchitect() {
         return architect.get();
@@ -154,7 +154,7 @@ public class Building {
         return architect;
     }
     public void setArchitect(String architect) {
-        this.city.set(architect);
+        this.architect.set(architect);
     }
     public String getArchitectual_style() {
         return architectual_style.get();
@@ -207,8 +207,8 @@ public class Building {
     public StringProperty imageProperty() {
         return image;
     }
-    public void setImage(String image) {
-        this.image.set(image);
+    //public void setImage(String image) {
+       // this.image.set(image);
     }
-}
+
 

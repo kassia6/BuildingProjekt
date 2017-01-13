@@ -25,6 +25,7 @@ public class AppUI extends BorderPane implements ViewMixin{
     private LeftSide leftSide; // Attribut des BoderPane CENTER linke Seite
     private RightSide rightSide; // Attribut des BoderPane CENTER rechte Seite
     private final PresentationModel pm;
+    private Header header;
 
     // Contructor (pro abgekapselter Klasse immer gleicher Aufbau!):
     public AppUI(PresentationModel pm) {
@@ -42,6 +43,7 @@ public class AppUI extends BorderPane implements ViewMixin{
         splitpane.setDividerPositions(0.2);
         leftSide = new LeftSide(pm);
         rightSide = new RightSide(pm);
+        header = new Header(pm);
     }
 
     // Anordnung des Layouts inkl. Rezising-Verhalten:
@@ -49,7 +51,11 @@ public class AppUI extends BorderPane implements ViewMixin{
         setTop(top); // TOP: der Button-Bereich
         setCenter(splitpane); // CENTER: Splitpane, die sich in links und rechts aufteilt
         splitpane.setOrientation(Orientation.HORIZONTAL);
-        splitpane.getItems().addAll(leftSide, rightSide); // alle Elemente der SplitPane!
+        SplitPane rightPane = new SplitPane();
+        rightPane.setOrientation(Orientation.VERTICAL);
+        rightPane.getItems().addAll(header,rightSide);
+        splitpane.getItems().addAll(leftSide, rightPane); // alle Elemente der SplitPane!
+
     }
 }
 

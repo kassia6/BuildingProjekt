@@ -14,7 +14,7 @@ public class AppStarter extends Application {
         PresentationModel pm = new PresentationModel();
         Parent rootPanel = new AppUI(pm);
         Scene scene = new Scene(rootPanel);
-        String stylesheet = getClass().getResource("style.css").toExternalForm();
+        String stylesheet = getClass().getResource("/style.css").toExternalForm();
         scene.getStylesheets().add(stylesheet);
 
         primaryStage.titleProperty().bind(pm.titleProperty());

@@ -43,7 +43,7 @@
 }
 
 .form {
-    -fx-background-color: linear-gradient(#bfd3e8 0%, #a8c2de 25%, #90b0d5 100%);
+    -fx-background-image: url("background.jpg");
     -fx-padding: 40 20 30 20;
     -fx-hgap: 10;
     -fx-vgap: 10;
@@ -52,10 +52,14 @@
 }
 
 .header {
-    -fx-font-size: 30;
-    -fx-background-color: linear-gradient(#c3e8cd 0%, #b4e4be 25%, #86d88b 100%);
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+    -fx-background-image: url("background.jpg");
     -fx-padding: 40 20 30 20;
-    -fx-spacing: 20;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
     -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
 }
 
@@ -65,4 +69,15 @@
     -fx-alignment: center;
     -fx-background-color: linear-gradient(#e8bfc6 0%, #e8adb0 25%, #e894a1 100%);
     -fx-effect: innershadow(two-pass-box, black, 10, 0, 0, 0);
+}
+
+.rank {
+    -fx-font-size: 32px;
+}
+.name {
+    -fx-font-size: 200px;
+}
+
+.cityCountryHeight {
+    -fx-font-size: 12px;
 }
