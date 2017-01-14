@@ -126,7 +126,7 @@ public class Building {
     public SimpleDoubleProperty height_ftProperty() {
         return height_ft;
     }
-    public void setHeight_ft(Double height_ft) {
+    public void setHeight_ft(double height_ft) {
         this.height_ft.set(height_ft);
     }
     public String getFloors() {

@@ -1,6 +1,7 @@
 package ch.fhnw.oop2.presentationmodels.view;
 
 import ch.fhnw.oop2.presentationmodels.Building;
+import ch.fhnw.oop2.presentationmodels.HeightControlPane;
 import ch.fhnw.oop2.presentationmodels.PresentationModel;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -17,23 +18,30 @@ public class Header extends GridPane implements ViewMixin {
     private Label labelCountry;
     private Label labelName;
     private Label labelHeight_m;
+    private HBox cityalignment;
+    private HeightControlPane customControl;
 
     public Header(PresentationModel pm) {
         this.pm = pm;
-        getStyleClass().add("header");
+        getStyleClass().add("form");
         init();
     }
 
     @Override
     public void initializeControls() {
-        getStyleClass().add("rank");
         labelRank = new Label();
-        getStyleClass().add("name");
+        labelRank.getStyleClass().add("rank");
         labelName = new Label("Name");
-        getStyleClass().add("cityCountryHeight");
+        labelName.getStyleClass().add("name");
         labelCity = new Label("City");
+        labelCity.getStyleClass().add("cityCountryHeight");
         labelCountry = new Label("Country");
+        labelCountry.getStyleClass().add("cityCountryHeight");
         labelHeight_m = new Label("Height_m");
+        labelHeight_m.getStyleClass().add("cityCountryHeight");
+        cityalignment = new HBox();
+        customControl = new HeightControlPane(pm);
+
     }
 
     @Override
@@ -52,9 +60,10 @@ public class Header extends GridPane implements ViewMixin {
         // alle Teile hinzufügen: columnIndex, rowIndex
         add(labelRank, 0, 0);
         add(labelName, 0, 1);
-        add(labelCity, 0, 2);
-        add(labelCountry, 1,2);
-        add(labelHeight_m, 0,3);
+        add(labelHeight_m, 0, 3);
+        cityalignment.getChildren().addAll(labelCity, labelCountry);
+        add(cityalignment, 0, 2);
+        add(customControl,3,0,4,4);
     }
 
     @Override
@@ -75,6 +84,7 @@ public class Header extends GridPane implements ViewMixin {
     public Label getLabelRank() {
         return labelRank;
     }
+
     public void setLabelRank(Label labelRank) {
         this.labelRank = labelRank;
     }
@@ -82,6 +92,7 @@ public class Header extends GridPane implements ViewMixin {
     public Label getLabelName() {
         return labelName;
     }
+
     public void setLabelName(Label labelName) {
         this.labelName = labelName;
     }
@@ -89,6 +100,7 @@ public class Header extends GridPane implements ViewMixin {
     public Label getLabelCity() {
         return labelCity;
     }
+
     public void setLabelCity(Label labelCity) {
         this.labelCity = labelCity;
     }
@@ -96,6 +108,7 @@ public class Header extends GridPane implements ViewMixin {
     public Label getLabelCountry() {
         return labelCountry;
     }
+
     public void setLabelCountry(Label labelCountry) {
         this.labelCountry = labelCountry;
     }
@@ -103,6 +116,7 @@ public class Header extends GridPane implements ViewMixin {
     public Label getLabelHeight_m() {
         return labelHeight_m;
     }
+
     public void setLabelAHeight_m(Label labelHeight_m) {
         this.labelHeight_m = labelHeight_m;
     }
