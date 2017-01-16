@@ -82,6 +82,11 @@ public class PresentationModel {
         Platform.runLater(() -> setSelectedBuilding(buildings.get(0)));
         // damit zuerst UI-Teil hochfährt und genug Zeit hat, um die Daten aus der TableView korrekt darzustellen.
 
+        //Im Constructor: Die setRanking Funktion einbinden:
+        buildingProxy.height_mProperty().addListener((observable, oldValue, newValue) ->
+
+                Platform.runLater(() ->  setRanking())); // Platform.runLater. Das bewirkt, dass ‘setRanking’ aufgerufen wird, nachdem die Höhe korrekt gesetzt worden ist.
+
         // im Constructor: undo/redo-Binding-Logik
         undoDisabled.bind(Bindings.isEmpty(undoStack));
         redoDisabled.bind(Bindings.isEmpty(redoStack));
@@ -151,7 +156,7 @@ public class PresentationModel {
 
     private void setRanking() {
         Collections.sort(buildings,
-                (o1, o2) -> (int) (Double.valueOf(o2.getHeight_ft()) - Double.valueOf(o1.getHeight_m())));
+                (o1, o2) -> (int) (Double.valueOf(o2.getHeight_m()) - Double.valueOf(o1.getHeight_m())));
 
         for (int i = 0; i < buildings.size(); i++) {
             buildings.get(i).setRank(i+1);
